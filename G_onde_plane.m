@@ -7,7 +7,7 @@ Nquad = length(s);
 r0_mat = repmat(r0,[Nquad,1]);
 
 kr0 = k0*norm(r0,2);
-Const = (1i * k0) / (4*pi);
+Const = (1i * k0) / (16*pi^2);
 
 norms =  sqrt(s(:,1).^2 + s(:,2).^2 + s(:,3).^2);
 cos_theta = dot(s,r0_mat,2) ./ (norm(r0,2).*norms);
@@ -17,7 +17,7 @@ hp1 = sphbessel(ind, (kr0) );
 
 % All this is aimed to avoid generating the legendre polynomial matrix
 % several times
-name = 'LegPoyCosMat.mat';
+name = ['LegPoyCosMat_L' num2str(L) '.mat'];
 if (~exist(name))
     legendrePmat = zeros(L+1,Nquad);
     for q = 0:L

@@ -33,8 +33,8 @@ w_phi = 2*pi / nbphi;
 [Sx, Sy, Sz] = sph2cart(points_phi_rep', (points_theta_rep-pi/2)',1); 
 PointsQuad = [Sx, Sy, Sz];
 WeightsQuad = w_theta_rep.*w_phi;
-figure(4)
-plot3(Sx,Sy,Sz, '.r') % plot the quadrature points
+% figure(4)
+% plot3(Sx,Sy,Sz, '.r') % plot the quadrature points
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % compute the plane wave expansion

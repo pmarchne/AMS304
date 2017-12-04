@@ -1,6 +1,6 @@
 % Quadrature de Gauss-Legendre à L points. Cette quadrature est exacte
 % pour les polynomes de degrés au plus 2L-1. Les poids sont déterminés par
-% les racines des polynomes de Legendre. Pour L = 1, on a 
+% les racines des polynomes de Legendre.
 
 function [wi,xi,time] = GaussLeg(L)
 tic;

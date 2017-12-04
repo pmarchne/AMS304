@@ -9,14 +9,14 @@ L_leg = L(abs(m+1),:);
 sumLeg = wi*(L_leg)';
 
 %%%%%%%%%%%%%%%%%%%%%%%% quadrature uniforme %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-J = l-1 ;
-j = 0:J;
-wi_phi = 2*pi ./ l*ones(l,1);
-phi_i = 2*pi.*j/l;
-quad_uni = sum(wi_phi'*(exp(1i*m.*phi_i))');
-
 if (l==0)
-    quad_uni = 1;
+    quad_uni = 2*pi;
+else
+    J = l-1 ;
+    j = 0:J;
+    wi_phi = 2*pi ./ l*ones(l,1);
+    phi_i = 2*pi.*j/l;
+    quad_uni = sum(wi_phi'*(exp(1i*m.*phi_i))');
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
