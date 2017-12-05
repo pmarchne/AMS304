@@ -13,8 +13,8 @@ Sy = YCoor' - YCoor;
 Sz = ZCoor' - ZCoor;
 
 % the final matrix should have zero diagonal terms
-S = sqrt(Sx.^2 + Sy.^2 + Sz.^2) ;%- eye(N);
-GreenMat = exp(1i*k*S)./S ;% + eye(N)*exp(-1i * k);
+S = sqrt(Sx.^2 + Sy.^2 + Sz.^2) - eye(N);
+GreenMat = exp(1i*k*S)./S + eye(N)*exp(-1i * k);
 
 end
 

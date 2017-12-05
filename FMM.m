@@ -1,8 +1,8 @@
-function [GreenKernel] = FMM(x,y,x0,y0,L,k0)
+function [GreenKernel] = FMM(x,y,r0,L,k0)
 % number of quadrature points 
 nbtheta = L + 1;
 nbphi = 2*L+1;
-r0 = x0 - y0;
+%r0 = x0 - y0;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % quadrature on theta: L+1 points in [0,pi]
@@ -34,13 +34,32 @@ w_phi = 2*pi / nbphi;
 PointsQuad = [Sx, Sy, Sz];
 WeightsQuad = w_theta_rep.*w_phi;
 % figure(4)
-% plot3(Sx,Sy,Sz, '.r') % plot the quadrature points
+% myfig = plot3(Sx,Sy,Sz, '--ob') ;% plot the quadrature points
+% set(myfig,'LineWidth',0.001)
+% view(2);
+% axis('equal');
+% xlabel('$x$','Interpreter','latex','FontSize',24);
+% ylabel('$y$','Interpreter','latex','FontSize',24);
+% zlabel('$z$','Interpreter','latex','FontSize',24);
+% grid on;
+% %xt = get(gca, 'XTick');
+% set(gca,'TickLabelInterpreter','latex')
+% set(gca,'FontSize', 24);
+% % ajouter eventuellement un titre
+% %title(titre);
+% view(3)
+% x0=50;
+% y0=50;
+% width=600;
+% height=500;
+% set(gcf,'units','points','position',[x0,y0,width,height])
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % compute the plane wave expansion
 % Ceps = 7.5; D = 0.3*lambda; L_advice = sqrt(3)*k0*D + Ceps*log(sqrt(3)*k0*D + pi);
 [val] = G_onde_plane(PointsQuad,r0,L,k0); % leg pol remove the loop
-tot_exp = WeightsQuad.* exp(-1i*k0*PointsQuad*(y-y0)') .* val.' .* exp(1i*k0*PointsQuad*(x-x0)') ;
+%tot_exp = WeightsQuad.* exp(-1i*k0*PointsQuad*(y-y0)') .* val.' .* exp(1i*k0*PointsQuad*(x-x0)') ;
+tot_exp = WeightsQuad.* exp(1i*k0*PointsQuad*(x-y+r0)') .* val.' ;
 GreenKernel = sum(tot_exp); % do a big function for FMM
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
